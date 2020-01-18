@@ -36,17 +36,9 @@
             {{#if c.is_private}}
               <td>
                 <div class="alert alert-info">
-                  <h4>{{replace-emoji (i18n 'private_categories.this_category_is_private' name=c.name)}}</h4>
-                  {{#if currentUser}}
-                    <p>{{replace-emoji (i18n 'private_categories.you_need_to_request_access')}}</p>
-                    <button class='btn btn-small btn-primary' {{action 'createNewMessageViaParams' c.slug (i18n 'private_categories.message.subject' name=c.name) (i18n 'private_categories.message.body' name=c.name)}}>
-                      <i class='fa fa-user-plus'></i>
-                      {{i18n 'private_categories.request_access_button'}}<br/>
-                    </button>
-                  {{else}}
-                    <p>{{replace-emoji (i18n 'private_categories.you_need_to_sign_in')}}</p>
-                    {{d-button action="showLogin" class="btn-small btn-primary login-button" icon="user" label="log_in"}}
-                  {{/if}}
+                  <h4>{{c.name}} ist nur für JOCR Pro`s verfügbar</h4>
+                  <p>Um diese Kategorie zu sehen, melde dich bitte über Patreon an. Wenn du mich noch nicht auf Patreon unterstützt, klicke zuerst auf „Unterstütze mich auf Patreon“ melde dich dort an und kehre auf diese Seite zurück.</p>
+                  <a href='https://www.patreon.com/join/jocr' class='btn btn-small btn-primary'>Unterstütze mich auf Patreon</a>
                 </div>
               </td>
             {{else}}
