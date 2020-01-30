@@ -9,10 +9,12 @@ after_initialize do
 
   Category.class_eval do
     attr_accessor :is_private
+    attr_accessor :is_not_stuff
   end
 
   CategoryDetailedSerializer.class_eval do
     attributes :is_private
+    attributes :is_not_stuff
 
     def is_private
       object.is_private
