@@ -10,59 +10,57 @@
       </thead>
       <tbody>
         {{#each model.categories as |c|}}
-          {{#if c.id != 3}}
-            <tr data-category_id='{{unbound c.id}}' class="{{if c.description_excerpt 'has-description' 'no-description'}} {{if c.logo_url 'has-logo' 'no-logo'}}">
-              <td class='category' style={{border-color c.color}}>
-                <div>
-                  {{category-title-link category=c}}
-                  {{category-unread category=c}}
-                  {{#if c.logo_url}}
-                    {{category-logo-link category=c}}
-                  {{/if}}
-
-                  <div class="category-description">
-                    {{{c.description_excerpt}}}
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                {{#if c.subcategories}}
-                  <div class='subcategories'>
-                    {{#each Category.where(parent_category_id: c.id) as |s|}}
-                      {{category-link s hideParent="true"}}
-                      {{category-unread category=s}}
-                    {{/each}}
-                  </div>
+          <tr data-category_id='{{unbound c.id}}' class="{{if c.description_excerpt 'has-description' 'no-description'}} {{if c.logo_url 'has-logo' 'no-logo'}}">
+            <td class='category' style={{border-color c.color}}>
+              <div>
+                {{category-title-link category=c}}
+                {{category-unread category=c}}
+                {{#if c.logo_url}}
+                  {{category-logo-link category=c}}
                 {{/if}}
-              </td>
-              {{#if c.is_private}}
-                <td>
-                  <div class="alert alert-info">
-                    <h4>{{c.name}} ist nur für JOCR Pro`s verfügbar</h4>
-                    <p>Um diese Kategorie zu sehen, melde dich bitte über Patreon an. Wenn du mich noch nicht auf Patreon unterstützt, klicke zuerst auf „Unterstütze mich auf Patreon“ melde dich dort an und kehre auf diese Seite zurück.</p>
-                    <a href='https://www.patreon.com/join/jocr' class='btn btn-small btn-primary'>Unterstütze mich auf Patreon</a>
-                  </div>
-                </td>
-              {{else}}
-                <td class="{{if c.archived 'archived'}} latest">
-                  {{#each c.featuredTopics as |f|}}
-                    {{featured-topic topic=f latestTopicOnly=latestTopicOnly action="showTopicEntrance"}}
+
+                <div class="category-description">
+                  {{{c.description_excerpt}}}
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              {{#if c.subcategories}}
+                <div class='subcategories'>
+                  {{#each Category.where(parent_category_id: c.id) as |s|}}
+                    {{category-link s hideParent="true"}}
+                    {{category-unread category=s}}
                   {{/each}}
-                </td>
+                </div>
               {{/if}}
-              <td class='stats' title={{c.topicStatsTitle}}>
-                <table class="categoryStats">
-                  <tbody>
-                  {{#each c.topicCountStats as |s|}}
-                    <tr>
-                      <td class="value">{{s.value}}</td>
-                      <td class="unit"> / {{s.unit}}</td>
-                    </tr>
-                  {{/each}}
-                  </tbody>
-                </table>
+            </td>
+            {{#if c.is_private}}
+              <td>
+                <div class="alert alert-info">
+                  <h4>{{c.name}} ist nur für JOCR Pro`s verfügbar</h4>
+                  <p>Um diese Kategorie zu sehen, melde dich bitte über Patreon an. Wenn du mich noch nicht auf Patreon unterstützt, klicke zuerst auf „Unterstütze mich auf Patreon“ melde dich dort an und kehre auf diese Seite zurück.</p>
+                  <a href='https://www.patreon.com/join/jocr' class='btn btn-small btn-primary'>Unterstütze mich auf Patreon</a>
+                </div>
               </td>
-            </tr>
-          {{/if}}
+            {{else}}
+              <td class="{{if c.archived 'archived'}} latest">
+                {{#each c.featuredTopics as |f|}}
+                  {{featured-topic topic=f latestTopicOnly=latestTopicOnly action="showTopicEntrance"}}
+                {{/each}}
+              </td>
+            {{/if}}
+            <td class='stats' title={{c.topicStatsTitle}}>
+              <table class="categoryStats">
+                <tbody>
+                {{#each c.topicCountStats as |s|}}
+                  <tr>
+                    <td class="value">{{s.value}}</td>
+                    <td class="unit"> / {{s.unit}}</td>
+                  </tr>
+                {{/each}}
+                </tbody>
+              </table>
+            </td>
+          </tr>
         {{/each}}
       </tbody>
     </table>
