@@ -17,6 +17,10 @@ after_initialize do
     def is_private
       object.is_private
     end
+
+    def is_not_stuff
+      object.is_not_stuff
+    end
   end
 
   module CategoryListExtensions
@@ -37,6 +41,7 @@ after_initialize do
       super
       @categories.each do |category|
         category.is_private = !@guardian.can_see_category?(category)
+        category.is_not_stuff = category.id != 3
       end
     end
   end
